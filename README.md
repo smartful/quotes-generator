@@ -1,3 +1,3 @@
 # quotes-generator
 
-Ce site est un générateur de citation codé en JS.
+Ce site est un générateur de citations codé en JS.
