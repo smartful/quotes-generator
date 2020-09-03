@@ -1,3 +1,5 @@
+const quotesLength = quotes.length;
+
 /* Get elements from HTML code */
 const quoteContainer = document.getElementById('quote-container');
 const quoteText = document.getElementById('quote');
@@ -6,49 +8,26 @@ const twitterButton = document.getElementById('twitter');
 const newQuoteButton = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
-
 /* Functions */
-// function chooseIndex(arrayLength) {
-//   return Math.floor(Math.random()*arrayLength);
-// }
-
-function showLoadingSpinner() {
-  loader.hidden = false;
-  quoteContainer.hidden = true;
-}
-
-function removeLoadingSpinner() {
-  if (!loader.hidden) {
-    loader.hidden = true;
-    quoteContainer.hidden = false;
-  }
+function chooseIndex(arrayLength) {
+  return Math.floor(Math.random()*arrayLength);
 }
 
 async function getQuote() {
-  showLoadingSpinner();
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-  const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en';
-  try {
-    const response = await fetch(proxyUrl + apiUrl);
-    const data = await response.json();
-    if (data.quoteAuthor === '') {
-      quoteAuthor.innerText = 'Unknown';
-    } else {
-      quoteAuthor.innerText = data.quoteAuthor;
-    }
-
-    // Reduce font size for long quotes
-    if (data.quoteText.length > 120) {
-      quoteText.classList.add('long-quote');
-    } else {
-      quoteText.classList.remove('long-quote');
-    }
-    quoteText.innerText = data.quoteText;
-    removeLoadingSpinner();
-  } catch (error) {
-    getQuote();
-    console.error('Whooop, no quote !', error);
+  const quote = quotes[chooseIndex(quotesLength)];
+  if (quote.quoteAuthor === '') {
+    quoteAuthor.innerText = 'Unknown';
+  } else {
+    quoteAuthor.innerText = quote.quoteAuthor;
   }
+
+  // Reduce font size for long quotes
+  if (quote.quoteText.length > 120) {
+    quoteText.classList.add('long-quote');
+  } else {
+    quoteText.classList.remove('long-quote');
+  }
+  quoteText.innerText = quote.quoteText;
 }
 
 function tweetQuote() {

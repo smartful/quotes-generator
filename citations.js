@@ -1,4 +1,4 @@
-const citations = [
+const quotes = [
   {
     quoteText: "La plus petite minorité sur Terre est l'individu. Ceux qui nient les droits individuels ne peuvent pas prétendre être des défenseurs des minorités. Les droits individuels ne peuvent pas être soumis au vote du public.",
     quoteAuthor: "Ayn Rand"
